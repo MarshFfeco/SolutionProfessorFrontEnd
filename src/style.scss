@@ -44,7 +44,7 @@ a {
 }
 
 /* COMPONENTS WITH FORM */
-.textfield {
+.TEXTFIELD {
     width: 100%;
 
     border: none;
@@ -75,6 +75,26 @@ a {
         }
     }
 
+    &--RADIO {
+        &--CHECKES {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            align-items: center;
+
+            label {
+                align-self: center;
+                justify-self: center;
+            }
+        }
+
+        p {
+            font-size: 18px;
+
+            margin-bottom: 16px;
+        }
+    }
+
     &--extra {
         width: 100%;
 
@@ -86,7 +106,18 @@ a {
     }
 }
 
-.button {
+.TEXTFIELD-COMP {
+    @extend .TEXTFIELD;
+
+    display: flex;
+    column-gap: 16px;
+
+    input {
+        width: 50%;
+    }
+}
+
+.BUTTON {
     width: 100%;
 
     padding: 16px 24px;
@@ -99,4 +130,9 @@ a {
     font-weight: 700;
 
     color: white;
+}
+
+.BUTTON-ACTIVE {
+    text-decoration: underline;
+    text-decoration-color: coral;
 }
