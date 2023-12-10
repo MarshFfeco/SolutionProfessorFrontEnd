@@ -1,3 +1,9 @@
+/* VARIABLES */
+$BASE--COLOR: #ff7f50;
+
+$color1: #f4f4f4;
+$color2: #3197EE;
+
 /* DEFAULT CONFIG */
 :root {
     font-family: 'Poppins', sans-serif;
@@ -43,87 +49,175 @@ a {
     height: 100%;
 }
 
+input {
+    width: 100%;
+    height: 100%;
+
+    padding-block: 16px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 18px;
+    color: black;
+
+    background-color: #fff;
+
+    &:focus {
+        outline: none;
+        border: none;
+    }
+}
+
 /* COMPONENTS WITH FORM */
+.ICON {
+    width: auto;
+    padding-inline: 12px;
+}
+
 .TEXTFIELD {
     width: 100%;
 
-    border: none;
-    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     margin-bottom: 16px;
 
-    input {
-        width: 100%;
+    border: 2px solid #E2E8F0;
+    border-radius: 8px;
 
-        padding: 16px 12px;
+    font-size: 18px;
+    color: black;
 
-        border: 2px solid #E2E8F0;
-        border-radius: 8px;
+    background-color: #fff;
 
-        font-size: 18px;
-        color: black;
+    cursor: pointer;
 
-        background-color: #fff;
-
-        ::placeholder {
-            color: #F8FAFC;
-            opacity: 1;
-        }
-
-        &:focus {
-            outline: none;
-        }
+    &:hover {
+        outline: none;
+        border: 2px solid $BASE--COLOR;
     }
 
-    &--RADIO {
-        &--CHECKES {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr;
-            align-items: center;
-
-            label {
-                align-self: center;
-                justify-self: center;
-            }
-        }
-
-        p {
-            font-size: 18px;
-
-            margin-bottom: 16px;
-        }
+    &--ACCEPT {
+        border-color: #7fff00;
     }
 
-    &--extra {
+    &--REJECT {
+        border-color: #ff6347;
+    }
+
+    &--COMP {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+        row-gap: 16px;
+        column-gap: 16px;
+    }
+
+    &--EXTRA {
         width: 100%;
 
+        margin-bottom: 16px;
         margin-top: 8px;
 
         font-weight: 600;
         text-align: right;
-        color: coral;
+        color: $BASE--COLOR;
+
+        &:hover button {
+            text-decoration: underline;
+        }
     }
 }
 
-.TEXTFIELD-COMP {
-    @extend .TEXTFIELD;
+.TEXTFIELD--RADIO {
+    margin-bottom: 16px;
 
-    display: flex;
-    column-gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
-    input {
-        width: 50%;
+    justify-content: flex-start;
+
+    &--CHECK {
+        width: 100%;
+
+        display: flex;
+        column-gap: 8px;
+
+        padding-inline: 12px;
+
+        position: relative;
+
+        input {
+            position: absolute;
+            opacity: 1;
+
+            +.radio-label {
+                &:before {
+                    content: '';
+                    background: $color1;
+                    border-radius: 100%;
+                    border: 1px solid darken($color1, 25%);
+                    display: inline-block;
+                    width: 1.4em;
+                    height: 1.4em;
+                    position: relative;
+                    margin-right: 1em;
+                    vertical-align: top;
+                    cursor: pointer;
+                    text-align: center;
+                    transition: all 250ms ease;
+                }
+            }
+
+            &:checked {
+                +.radio-label {
+                    &:before {
+                        background-color: $color2;
+                        box-shadow: inset 0 0 0 4px $color1;
+                    }
+                }
+            }
+
+            &:focus {
+                +.radio-label {
+                    &:before {
+                        outline: none;
+                        border-color: $color2;
+                    }
+                }
+            }
+
+            &:disabled {
+                +.radio-label {
+                    &:before {
+                        box-shadow: inset 0 0 0 4px $color1;
+                        border-color: darken($color1, 25%);
+                        background: darken($color1, 25%);
+                    }
+                }
+            }
+
+            +.radio-label {
+                &:empty {
+                    &:before {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
     }
 }
 
+/* BUTTONS */
 .BUTTON {
     width: 100%;
 
     padding: 16px 24px;
     margin-top: 16px;
 
-    border: none;
+    border: 2px solid transparent;
     border-radius: 8px;
 
     font-size: 16px;
@@ -132,7 +226,35 @@ a {
     color: white;
 }
 
+.BUTTON--OUTLINE {
+    @extend .BUTTON;
+
+    border: 2px solid $BASE--COLOR;
+
+    color: $BASE--COLOR;
+
+    &:hover {
+        color: white;
+
+        background-color: $BASE--COLOR;
+    }
+}
+
+.BUTTON--FULL {
+    @extend .BUTTON;
+
+    background-color: $BASE--COLOR;
+
+    &:hover {
+        background-color: transparent;
+
+        border: 2px solid $BASE--COLOR;
+
+        color: $BASE--COLOR;
+    }
+}
+
 .BUTTON-ACTIVE {
     text-decoration: underline;
-    text-decoration-color: coral;
+    text-decoration-color: $BASE--COLOR;
 }
