@@ -13,8 +13,8 @@
         }
     })
 
-    function ChangeClicked(value: boolean) {
-        IsButtonActive.value = value
+    function ChangeClicked() {
+        IsButtonActive.value = !IsButtonActive.value
     }
 
 </script>
@@ -25,9 +25,9 @@
       <button
         id="MainView--Title--Button"
         :class="[IsButtonActive ? 'BUTTON-ACTIVE' : '']"
-        @click="ChangeClicked(true)"
+        @click="ChangeClicked"
       >
-        <h2>
+        <h2 class="DISPLAY">
           Login
         </h2>
       </button>
@@ -35,9 +35,9 @@
       <button
         id="MainView--Title--Button"
         :class="[!IsButtonActive ? 'BUTTON-ACTIVE' : '']"
-        @click="ChangeClicked(false)"
+        @click="ChangeClicked"
       >
-        <h2>
+        <h2 class="DISPLAY">
           SignUp
         </h2>
       </button>
@@ -54,23 +54,24 @@
 </template>
 
 <style lang="scss" scoped>
+    @import "../style.scss";
+
     .slide-move-enter-active,
     .slide-move-leave-active {
     transition: all 0.2s ease-out;
     }
-
     .slide-move-enter-from {
     opacity: 0;
     transform: translateX(300px);
     }
-
     .slide-move-leave-to {
     opacity: 0;
     transform: translateX(-300px);
     }
 
     #MainView {
-        height: 100%;
+        min-height: 80vh;
+        margin-block: 10vh;
 
         display: flex;
         flex-direction: column;
@@ -82,15 +83,13 @@
         &--Title {
             width: 90vmin;
 
-            font-size: 36px;
-
             margin-bottom: 32px;
 
             &--Button {
                 margin-right: 64px;
 
                 &:hover {
-                    text-decoration: underline;
+                    color: $BASE--COLOR;
                 }
             }
         }

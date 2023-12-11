@@ -4,6 +4,13 @@ $BASE--COLOR: #ff7f50;
 $color1: #f4f4f4;
 $color2: #3197EE;
 
+$Large: 1240px;
+$Normal: 905px;
+$Medium: 600px;
+$Small: 368px;
+
+
+
 /* DEFAULT CONFIG */
 :root {
     font-family: 'Poppins', sans-serif;
@@ -53,6 +60,8 @@ a {
 }
 
 input {
+    @extend .BODY;
+
     width: 100%;
     height: 100%;
 
@@ -61,8 +70,6 @@ input {
     border: none;
     border-radius: 8px;
 
-    font-size: 18px;
-    letter-spacing: .05em;
     color: black;
 
     background-color: #fff;
@@ -78,12 +85,126 @@ em {
     color: $BASE--COLOR;
 }
 
+/* FONT SIZE */
+.DISPLAY {
+    font-weight: 600;
+
+    @media (min-width: $Large) {
+        font-size: 57px;
+        line-height: 64px;
+        letter-spacing: -0.25px;
+    }
+
+    @media (min-width: $Normal) {
+        font-size: 45px;
+        font-style: normal;
+        line-height: 52px;
+    }
+
+    @media (min-width: $Medium) {
+        font-size: 36px;
+        font-style: normal;
+        line-height: 44px;
+    }
+}
+
+.HEADLINE {
+    font-style: normal;
+    font-weight: 400;
+
+    @media (max-width: $Large) {
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    @media (max-width: $Normal) {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    @media (max-width: $Medium) {
+        font-size: 24px;
+        line-height: 32px;
+    }
+}
+
+.TITLE {
+    font-style: normal;
+
+    @media (max-width: $Large) {
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 28px;
+    }
+
+    @media (max-width: $Normal) {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+    }
+
+    @media (max-width: $Medium) {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: 0.1px;
+    }
+}
+
+.LABEL {
+    font-style: normal;
+    font-weight: 500;
+
+    @media (max-width: $Large) {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.1px;
+    }
+
+    @media (max-width: $Normal) {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.5px;
+    }
+
+    @media (max-width: $Medium) {
+        font-size: 11px;
+        line-height: 16px;
+        letter-spacing: 0.5px;
+    }
+}
+
+.BODY {
+    font-style: normal;
+    font-weight: 400;
+
+    @media (max-width: $Large) {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+    }
+
+    @media (max-width: $Normal) {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+    }
+
+    @media (max-width: $Medium) {
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+
+
 /* SHARED CLASS */
 .OBS {
+    @extend .LABEL;
+
     margin-top: 32px;
 
     text-align: center;
-    font-size: 16px;
 }
 
 /* COMPONENTS WITH FORM */
@@ -104,9 +225,6 @@ em {
     border: 2px solid #E2E8F0;
     border-radius: 8px;
 
-    font-size: 18px;
-    color: black;
-
     background-color: #fff;
 
     cursor: pointer;
@@ -126,7 +244,7 @@ em {
 
     &--COMP {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
         column-gap: 16px;
     }
@@ -135,7 +253,7 @@ em {
         margin-bottom: 16px;
 
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         row-gap: 16px;
         column-gap: 16px;
 
@@ -184,12 +302,13 @@ em {
     }
 
     &--EXTRA {
+        @extend .TITLE;
+
         width: 100%;
 
         margin-bottom: 16px;
         margin-top: 8px;
 
-        font-weight: 600;
         text-align: right;
         color: $BASE--COLOR;
 
@@ -201,6 +320,8 @@ em {
 
 /* BUTTONS */
 .BUTTON {
+    @extend .TITLE;
+
     width: 100%;
 
     padding: 16px 24px;
@@ -209,8 +330,7 @@ em {
     border: 2px solid transparent;
     border-radius: 8px;
 
-    font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
 
     color: white;
 }

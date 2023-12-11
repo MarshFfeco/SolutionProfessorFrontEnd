@@ -8,9 +8,9 @@ const pinia = createPinia();
 const app = createApp(App);
 
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { MdEmailOutlined, BiEye, BiEyeSlash, MdPassword, MdDrivefilerenameoutlineOutlined } from "oh-vue-icons/icons";
+import { MdEmailOutlined, BiEye, BiEyeSlash, MdSecuritySharp, MdDrivefilerenameoutlineOutlined } from "oh-vue-icons/icons";
 
-addIcons(MdEmailOutlined, BiEye, BiEyeSlash, MdPassword, MdDrivefilerenameoutlineOutlined);
+addIcons(MdEmailOutlined, BiEye, BiEyeSlash, MdSecuritySharp, MdDrivefilerenameoutlineOutlined);
 
 app.use(pinia)
     .use(router)

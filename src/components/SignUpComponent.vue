@@ -53,7 +53,7 @@
           <div class="TEXTFIELD">
             <v-icon
               class="ICON"
-              name="md-password"
+              name="md-security-sharp"
               fill="#ff7f50"
               scale="1.5"
             />
@@ -75,7 +75,7 @@
           <div class="TEXTFIELD">
             <v-icon
               class="ICON"
-              name="md-password"
+              name="md-security-sharp"
               fill="#ff7f50"
               scale="1.5"
             />
