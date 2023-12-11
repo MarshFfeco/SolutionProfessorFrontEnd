@@ -61,7 +61,7 @@
               type="text"
               placeholder="Senha"
             >
-            <button>
+            <button type="button">
               <v-icon
                 class="ICON"
                 name="bi-eye"
@@ -83,7 +83,7 @@
               type="text"
               placeholder="Repetir senha"
             >
-            <button>
+            <button type="button">
               <v-icon
                 class="ICON"
                 name="bi-eye"
@@ -96,37 +96,37 @@
 
         <!-- TEXTFIELD SEX -->
         <div class="TEXTFIELD--RADIO">
-          <div class="TEXTFIELD--RADIO--CHECK">
+          <label>
             <input
-              id="ma"
+              type="radio"
+              name="radio"
               checked
-              type="radio"
-              name="sex"
-              value="m"
             >
-            <label
-              for="m"
-              class="radio-label"
-            >
-              Masculino
-            </label>
-          </div>
-          <div class="TEXTFIELD--RADIO--CHECK">
+            <span>Feminino</span>
+          </label>
+          <label>
             <input
-              id="w"
               type="radio"
-              name="sex"
-              value="w"
+              name="radio"
             >
-            <label
-              for="w"
-              class="radio-label"
-            >
-              Feminino
-            </label>
-          </div>
+            <span>Masculino</span>
+          </label>
         </div>
 
+        <div class="OBS">
+          <small>
+            Ao clicar em Cadastre-se, você concorda com nossos <a
+              href="#"
+              target="_blank"
+            ><em>Termos</em></a>, <a
+              href="#"
+              target="_blank"
+            ><em>Política de Privacidade</em></a> e <a
+              href="#"
+              target="_blank"
+            ><em>Política de Cookies</em></a>.
+          </small>
+        </div>
         <!-- BUTTON -->
         <button
           id="SignUpComponent--Button"

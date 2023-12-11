@@ -56,7 +56,7 @@
 <style lang="scss" scoped>
     .slide-move-enter-active,
     .slide-move-leave-active {
-    transition: all 0.25s ease-out;
+    transition: all 0.2s ease-out;
     }
 
     .slide-move-enter-from {
