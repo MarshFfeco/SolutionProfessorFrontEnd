@@ -213,6 +213,18 @@ em {
     padding-inline: 12px;
 }
 
+.FORM {
+    color: black;
+
+    border-radius: 20px;
+
+    padding-inline: 20px;
+    padding-block-start: 40px;
+    padding-block-end: 30px;
+
+    background-color: #F8FAFC;
+}
+
 .TEXTFIELD {
     width: 100%;
 
@@ -240,6 +252,12 @@ em {
 
     &--REJECT {
         border-color: #ff6347;
+
+        -webkit-animation: btn-blink .9s linear infinite;
+        -moz-animation: btn-blink .9s linear infinite;
+        -ms-animation: btn-blink .9s linear infinite;
+        -o-animation: btn-blink .9s linear infinite;
+        animation: btn-blink .9s linear infinite;
     }
 
     &--COMP {
@@ -315,6 +333,23 @@ em {
         &:hover button {
             text-decoration: underline;
         }
+    }
+}
+
+/* ANIMATION */
+@keyframes btn-blink {
+
+    0%,
+    100% {
+        border-color: #E2E8F0;
+    }
+
+    50% {
+        border-color: #f1a69c;
+    }
+
+    75% {
+        border-color: #ff6347;
     }
 }
 

@@ -1,97 +1,42 @@
+<script setup lang="ts">
+    import FormEmail from "./Form/FormEmail.vue";
+    import FormText from "./Form/FormText.vue";
+    import FormPassword from "./Form/FormPassword.vue";
+
+    const ListInputs = {
+       "Text": ["Nome", "sobrenome"],
+       "Password": ["Senha", "Repetir Senha"]
+    }
+
+    function SendForm(email: string) {
+        console.log(email)
+    }
+</script>
+
 <template>
   <div id="SignUpComponent">
-    <div id="SignUpComponent--Form">
+    <div class="FORM">
       <form action="">
         <!-- TEXTFIELD FIRST NAME AND LAST NAME -->
         <div class="TEXTFIELD--COMP">
-          <!-- TEXTFIELD FIRST NAME -->
-          <div class="TEXTFIELD">
-            <v-icon
-              class="ICON"
-              name="md-drivefilerenameoutline-outlined"
-              fill="#ff7f50"
-              scale="1.5"
-            />
-            <input
-              type="text"
-              placeholder="Nome"
-            >
-          </div>
-
-          <!-- TEXTFIELD LAST NAME -->
-          <div class="TEXTFIELD">
-            <v-icon
-              class="ICON"
-              name="md-drivefilerenameoutline-outlined"
-              fill="#ff7f50"
-              scale="1.5"
-            />
-            <input
-              type="text"
-              placeholder="Sobrenome"
-            >
-          </div>
+          <FormText
+            v-for="input in ListInputs.Text"
+            :key="input"
+            :placehold="input"
+            @submit="SendForm"
+          />
         </div>
 
         <!-- TEXTFIELD EMAIL -->
-        <div class="TEXTFIELD">
-          <v-icon
-            class="ICON"
-            name="md-email-outlined"
-            fill="#ff7f50"
-            scale="1.5"
-          />
-          <input
-            type="text"
-            placeholder="Email"
-          >
-        </div>
+        <FormEmail @submit="SendForm" />
 
         <!-- TEXTFIELD PASSWORD + REPEAT-PASSWORD -->
         <div class="TEXTFIELD--COMP">
-          <!-- TEXTFIELD PASSWORD -->
-          <div class="TEXTFIELD">
-            <v-icon
-              class="ICON"
-              name="md-security-sharp"
-              fill="#ff7f50"
-              scale="1.5"
-            />
-            <input
-              type="text"
-              placeholder="Senha"
-            >
-            <button type="button">
-              <v-icon
-                class="ICON"
-                name="bi-eye"
-                fill="#ff7f50"
-                scale="1.5"
-              />
-            </button>
-          </div>
-
-          <!-- TEXTFIELD REPEAT PASSWORD -->
-          <div class="TEXTFIELD">
-            <v-icon
-              class="ICON"
-              name="md-security-sharp"
-              fill="#ff7f50"
-              scale="1.5"
-            />
-            <input
-              type="text"
-              placeholder="Repetir senha"
-            >
-            <button type="button">
-              <v-icon
-                class="ICON"
-                name="bi-eye"
-                fill="#ff7f50"
-                scale="1.5"
-              />
-            </button>
-          </div>
+          <FormPassword
+            v-for="input in ListInputs.Password"
+            :key="input"
+            placehold="Senha"
+          />
         </div>
 
         <!-- TEXTFIELD SEX -->
@@ -145,16 +90,5 @@
 
       #SignUpComponent {
           width: 90vmin;
-          &--Form {
-              color: black;
-
-              border-radius: 20px;
-
-              padding-inline: 20px;
-              padding-block-start: 40px;
-              padding-block-end: 30px;
-
-              background-color: #F8FAFC;
-          }
       }
   </style>
