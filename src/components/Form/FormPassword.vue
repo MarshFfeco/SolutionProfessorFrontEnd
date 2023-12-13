@@ -1,34 +1,39 @@
 <script setup lang="ts">
-    import { ref, computed } from 'vue';
+    import { reactive, ref, computed, Ref } from 'vue';
+    import type { Rules } from 'async-validator'
+    import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator'
+
+    import FormMessage from "./FormMessage.vue"
+    import FormExtra from "./FormExtra.vue"
 
     const props = defineProps({
         placehold: { type: String, required: true },
+        isExtra: {type: Boolean}
     })
 
-    const inputValue = ref("")
-    const InputValue = computed({
-        get() {
-            return inputValue.value
-        },
-        set(newValue) {
-            inputValue.value = newValue
-        }
-    })
+    const form = reactive({ inputValue: ''})
+    const rules: Rules = {
+        inputValue: [
+            {
+                type: 'string',
+                required: true,
+                message: `${props.placehold} é necessário`,
+            },
+            {
+                type: 'string',
+                min: 8,
+                max: 20,
+                message: `${props.placehold} deve ter entre 8 e 20 caracteres`
+            }
+        ],
+    }
 
-    const inputClass = ref("")
-    const InputClass = computed({
-        get() {
-            return inputClass.value
-        },
-        set(newValue) {
-            inputClass.value = newValue
-        }
-    })
+    const { pass, errorFields } = useAsyncValidator(form, rules);
 
     const emit = defineEmits({
-        submit(input) {
-            if(input.length <= 0) {
-                throw new Error()
+        submit(_: string, pass: Ref<boolean>): Boolean {
+            if(!pass.value) {
+                return false;
             }
 
             return true;
@@ -36,12 +41,7 @@
     })
 
     function verify() {
-        try {
-            emit('submit', InputValue.value)
-            InputClass.value = "TEXTFIELD--ACCEPT"
-        } catch {
-            InputClass.value = "TEXTFIELD--REJECT"
-        }
+        emit('submit', form.inputValue, pass)
     }
 
     const isVisible = ref(false);
@@ -53,7 +53,6 @@
             isVisible.value = newValue
         }
     });
-
 
     const NameIconPassword = computed(() => IsVisible.value ? "bi-eye" : "bi-eye-slash")
 
@@ -73,7 +72,8 @@
 
 <template>
   <div
-    :class="['TEXTFIELD', InputClass]"
+    class="TEXTFIELD"
+    :class="{'TEXTFIELD--REJECT': errorFields?.inputValue?.length, 'TEXTFIELD--ACCEPT': !errorFields?.inputValue?.length}"
   >
     <v-icon
       class="ICON"
@@ -82,7 +82,7 @@
       scale="1.5"
     />
     <input
-      v-model="InputValue"
+      v-model="form.inputValue"
       type="password"
       :placeholder="props.placehold"
       @change="verify()"
@@ -99,6 +99,26 @@
       />
     </button>
   </div>
+
+  <div id="FormPassword">
+    <!-- MESSAGE -->
+    <FormMessage v-if="errorFields?.inputValue?.length">
+      <template #message>
+        <small>{{ errorFields.inputValue[0].message }}</small>
+      </template>
+    </FormMessage>
+    <!-- MESSAGE EXTRA -->
+    <FormExtra v-if="props.isExtra">
+      <template #extra>
+        <small>Esqueceu a senha</small>
+      </template>
+    </FormExtra>
+  </div>
 </template>
 
-<style></style>
+<style>
+    #FormPassword {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>

@@ -12,6 +12,7 @@ import { MdEmailOutlined, BiEye, BiEyeSlash, MdSecuritySharp, MdDrivefilerenameo
 
 addIcons(MdEmailOutlined, BiEye, BiEyeSlash, MdSecuritySharp, MdDrivefilerenameoutlineOutlined);
 
+app.config.performance = true;
 app.use(pinia)
     .use(router)
     .component("v-icon", OhVueIcon)

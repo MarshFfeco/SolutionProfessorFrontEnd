@@ -9,8 +9,6 @@ $Normal: 905px;
 $Medium: 600px;
 $Small: 368px;
 
-
-
 /* DEFAULT CONFIG */
 :root {
     font-family: 'Poppins', sans-serif;
@@ -232,14 +230,16 @@ em {
     justify-content: center;
     align-items: center;
 
-    margin-bottom: 16px;
-
     border: 2px solid #E2E8F0;
     border-radius: 8px;
 
     background-color: #fff;
 
     cursor: pointer;
+
+    &:is(.TEXTFIELD--MESSAGE) {
+        background-color: red;
+    }
 
     &:hover {
         outline: none;
@@ -253,15 +253,17 @@ em {
     &--REJECT {
         border-color: #ff6347;
 
-        -webkit-animation: btn-blink .9s linear infinite;
-        -moz-animation: btn-blink .9s linear infinite;
-        -ms-animation: btn-blink .9s linear infinite;
-        -o-animation: btn-blink .9s linear infinite;
-        animation: btn-blink .9s linear infinite;
+        -webkit-animation: btn-blink 2s linear infinite;
+        -moz-animation: btn-blink 2s linear infinite;
+        -ms-animation: btn-blink 2s linear infinite;
+        -o-animation: btn-blink 2s linear infinite;
+        animation: btn-blink 2s linear infinite;
     }
 
     &--COMP {
         display: grid;
+        // grid-template-columns: 1fr 1fr;
+        // grid-template-rows: 1fr;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
         column-gap: 16px;
@@ -339,17 +341,16 @@ em {
 /* ANIMATION */
 @keyframes btn-blink {
 
-    0%,
-    100% {
+    0% {
         border-color: #E2E8F0;
     }
 
     50% {
-        border-color: #f1a69c;
+        border-color: #ff6347;
     }
 
-    75% {
-        border-color: #ff6347;
+    100% {
+        border-color: #E2E8F0;
     }
 }
 

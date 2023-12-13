@@ -1,9 +1,25 @@
 <script setup lang="ts">
+    import { Ref, reactive } from "vue";
     import FormEmail from "./Form/FormEmail.vue";
     import FormPassword from "./Form/FormPassword.vue";
 
-    function SendForm(email: string) {
-        console.log(email)
+    import { validation } from "../validation/Validation";
+
+    const form = reactive({
+        "email": "",
+        "password": "",
+    })
+
+    function SendFormEmail(value: string, pass: Ref<boolean>) {
+        validation(pass.value, () => {
+            form.email = value
+        })
+    }
+
+    function SendFormPassword(value: string, pass: Ref<boolean>) {
+        validation(pass.value, () => {
+            form.password = value
+        })
     }
 
 </script>
@@ -15,17 +31,14 @@
     >
       <form action="">
         <!-- TEXTFIELD EMAIL -->
-        <FormEmail @submit="SendForm" />
+        <FormEmail @submit="SendFormEmail" />
 
         <!-- TEXTFIELD PASSWORD -->
-        <FormPassword placehold="Senha" />
-
-        <!-- BUTTON FORGOT PASSWORD -->
-        <div class="TEXTFIELD--EXTRA">
-          <button type="button">
-            <small>Esqueceu a senha?</small>
-          </button>
-        </div>
+        <FormPassword
+          is-extra
+          placehold="Senha"
+          @submit="SendFormPassword"
+        />
 
         <!-- BUTTON -->
         <button
@@ -46,3 +59,4 @@
         width: 90vmin;
     }
 </style>
+../validation/Validation

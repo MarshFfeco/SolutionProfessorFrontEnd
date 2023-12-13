@@ -19,12 +19,16 @@
       <form action="">
         <!-- TEXTFIELD FIRST NAME AND LAST NAME -->
         <div class="TEXTFIELD--COMP">
-          <FormText
+          <div
             v-for="input in ListInputs.Text"
             :key="input"
-            :placehold="input"
-            @submit="SendForm"
-          />
+          >
+            <FormText
+
+              :placehold="input"
+              @submit="SendForm"
+            />
+          </div>
         </div>
 
         <!-- TEXTFIELD EMAIL -->
@@ -32,11 +36,15 @@
 
         <!-- TEXTFIELD PASSWORD + REPEAT-PASSWORD -->
         <div class="TEXTFIELD--COMP">
-          <FormPassword
+          <div
             v-for="input in ListInputs.Password"
             :key="input"
-            placehold="Senha"
-          />
+          >
+            <FormPassword
+              :placehold="input"
+              @submit="SendForm"
+            />
+          </div>
         </div>
 
         <!-- TEXTFIELD SEX -->
@@ -58,6 +66,7 @@
           </label>
         </div>
 
+        <!-- OBS -->
         <div class="OBS">
           <small>
             Ao clicar em Cadastre-se, você concorda com nossos <a
@@ -72,6 +81,7 @@
             ><em>Política de Cookies</em></a>.
           </small>
         </div>
+
         <!-- BUTTON -->
         <button
           id="SignUpComponent--Button"
