@@ -214,11 +214,9 @@ em {
 .FORM {
     color: black;
 
-    border-radius: 20px;
+    border-radius: 8px;
 
-    padding-inline: 20px;
-    padding-block-start: 40px;
-    padding-block-end: 30px;
+    padding: 40px;
 
     background-color: #F8FAFC;
 }
@@ -237,8 +235,8 @@ em {
 
     cursor: pointer;
 
-    &:is(.TEXTFIELD--MESSAGE) {
-        background-color: red;
+    &:not(:has(+ .TEXTFIELD--MESSAGE, + #FormPassword > .TEXTFIELD--MESSAGE, + #FormPassword > .TEXTFIELD--EXTRA)) {
+        margin-bottom: 16px;
     }
 
     &:hover {
@@ -262,8 +260,6 @@ em {
 
     &--COMP {
         display: grid;
-        // grid-template-columns: 1fr 1fr;
-        // grid-template-rows: 1fr;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
         column-gap: 16px;
@@ -322,7 +318,7 @@ em {
     }
 
     &--EXTRA {
-        @extend .TITLE;
+        @extend .LABEL;
 
         width: 100%;
 
@@ -369,6 +365,12 @@ em {
     font-weight: 600;
 
     color: white;
+
+    transition: all 300ms linear;
+
+    &:disabled {
+        opacity: .5;
+    }
 }
 
 .BUTTON--OUTLINE {

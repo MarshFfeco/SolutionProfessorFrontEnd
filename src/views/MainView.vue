@@ -28,7 +28,7 @@
         @click="ChangeClicked"
       >
         <h2 class="DISPLAY">
-          Login
+          Entrar
         </h2>
       </button>
 
@@ -38,7 +38,7 @@
         @click="ChangeClicked"
       >
         <h2 class="DISPLAY">
-          SignUp
+          Cadastrar
         </h2>
       </button>
     </div>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-    import { reactive, Ref } from 'vue';
+    import { reactive } from 'vue';
     import type { Rules } from 'async-validator'
     import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator'
+    import { whenever  } from '@vueuse/core'
 
     const form = reactive({ inputValue: ''})
     const rules: Rules = {
@@ -16,22 +17,13 @@
 
     const { pass, errorFields } = useAsyncValidator(form, rules)
 
-    const emit = defineEmits({
-        submit(_: string, pass: Ref<boolean>): Boolean {
-            if(!pass.value) {
-                return false;
-            }
+    const emit = defineEmits(["submit"]);
 
-            return true;
-        }
-    })
-
-    function verify() {
-        emit('submit', form.inputValue, pass)
-    }
+    whenever(pass, () => emit('submit', form.inputValue))
 </script>
 
 <template>
+  <!-- TEXTFIELD INPUT -->
   <div
     class="TEXTFIELD"
     :class="{'TEXTFIELD--REJECT': errorFields?.inputValue?.length, 'TEXTFIELD--ACCEPT': !errorFields?.inputValue?.length}"
@@ -46,9 +38,10 @@
       v-model="form.inputValue"
       type="text"
       placeholder="Email"
-      @change="verify()"
     >
   </div>
+
+  <!-- MESSAGE -->
   <div
     v-if="errorFields?.inputValue?.length"
     class="TEXTFIELD--MESSAGE"

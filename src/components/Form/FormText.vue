@@ -1,9 +1,10 @@
 <script setup lang="ts">
-    import { reactive, Ref } from 'vue';
+    import { reactive } from 'vue';
     import type { Rules } from 'async-validator'
     import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator'
 
     import FormMessage from './FormMessage.vue';
+import { whenever } from '@vueuse/core';
 
     const props = defineProps({
         placehold: { type: String, required: true },
@@ -28,19 +29,9 @@
 
     const { pass, errorFields } = useAsyncValidator(form, rules)
 
-    const emit = defineEmits({
-        submit(_, pass: Ref<Boolean>) {
-            if(!pass.value) {
-                return false
-            }
+    const emit = defineEmits(["submit"]);
 
-            return true;
-        }
-    })
-
-    function verify() {
-        emit('submit', form.inputValue, pass)
-    }
+    whenever(pass, () => emit('submit', form.inputValue))
 </script>
 
 <template>
@@ -58,7 +49,6 @@
       v-model="form.inputValue"
       type="text"
       :placeholder="props.placehold"
-      @change="verify()"
     >
   </div>
 

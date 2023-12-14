@@ -1,10 +1,11 @@
 <script setup lang="ts">
-    import { reactive, ref, computed, Ref } from 'vue';
+    import { reactive, ref, computed } from 'vue';
     import type { Rules } from 'async-validator'
     import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator'
 
     import FormMessage from "./FormMessage.vue"
     import FormExtra from "./FormExtra.vue"
+import { whenever } from '@vueuse/core';
 
     const props = defineProps({
         placehold: { type: String, required: true },
@@ -30,19 +31,9 @@
 
     const { pass, errorFields } = useAsyncValidator(form, rules);
 
-    const emit = defineEmits({
-        submit(_: string, pass: Ref<boolean>): Boolean {
-            if(!pass.value) {
-                return false;
-            }
+    const emit = defineEmits(["submit"]);
 
-            return true;
-        }
-    })
-
-    function verify() {
-        emit('submit', form.inputValue, pass)
-    }
+    whenever(pass, () => emit('submit', form.inputValue))
 
     const isVisible = ref(false);
     const IsVisible = computed({
@@ -85,7 +76,6 @@
       v-model="form.inputValue"
       type="password"
       :placeholder="props.placehold"
-      @change="verify()"
     >
     <button
       type="button"
@@ -116,7 +106,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
     #FormPassword {
         display: flex;
         justify-content: space-between;

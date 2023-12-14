@@ -1,25 +1,25 @@
 <script setup lang="ts">
-    import { Ref, reactive } from "vue";
+    import { reactive, ref } from "vue";
     import FormEmail from "./Form/FormEmail.vue";
     import FormPassword from "./Form/FormPassword.vue";
 
-    import { validation } from "../validation/Validation";
+    import { until } from '@vueuse/core'
 
     const form = reactive({
         "email": "",
         "password": "",
     })
 
-    function SendFormEmail(value: string, pass: Ref<boolean>) {
-        validation(pass.value, () => {
-            form.email = value
-        })
+    const isDisable = ref(true)
+
+    until(form).toMatch(v => v.email.length > 0 && v.password.length > 0).then(() => { isDisable.value = false })
+
+    function SendFormEmail(value: string) {
+        form.email = value
     }
 
-    function SendFormPassword(value: string, pass: Ref<boolean>) {
-        validation(pass.value, () => {
-            form.password = value
-        })
+    function SendFormPassword(value: string) {
+        form.password = value
     }
 
 </script>
@@ -42,6 +42,7 @@
 
         <!-- BUTTON -->
         <button
+          :disabled="isDisable"
           type="submit"
           class="BUTTON--FULL"
         >
@@ -59,4 +60,3 @@
         width: 90vmin;
     }
 </style>
-../validation/Validation
