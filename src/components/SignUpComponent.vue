@@ -1,70 +1,76 @@
 <script setup lang="ts">
+    import { computed, reactive } from "vue";
     import FormEmail from "./Form/FormEmail.vue";
     import FormText from "./Form/FormText.vue";
-    import FormPassword from "./Form/FormPassword.vue";
+    import FormPasswordRepeat from "./Form/FormPasswordRepeat.vue";
+    import FormSex from "./Form/FormSex.vue";
 
-    const ListInputs = {
-       "Text": ["Nome", "sobrenome"],
-       "Password": ["Senha", "Repetir Senha"]
+    const ListInputs = [
+      { "placehold": "sobrenome", "submit": SendFirstName },
+      { "placehold": "sobrenome", "submit": SendLastName }
+    ]
+
+    const form = reactive({
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "password": "",
+        "sex": ""
+    })
+
+    const IsDisable = computed(() => form.email.length === 0 || form.firstName.length === 0 || form.lastName.length === 0 || form.password.length === 0)
+
+    function SendFirstName(value: string) {
+        form.firstName = value
     }
 
-    function SendForm(email: string) {
-        console.log(email)
+    function SendLastName(value: string) {
+        form.lastName = value
+    }
+
+    function SendEmail(value: string) {
+        form.email = value
+    }
+
+    function SendPassword(value: string) {
+        form.password = value
+    }
+
+    function SendSex(value: string) {
+        form.sex = value
+    }
+
+    function SignUp() {
+        console.log(form)
     }
 </script>
 
 <template>
   <div id="SignUpComponent">
     <div class="FORM">
-      <form action="">
+      <form @submit.prevent="SignUp">
         <!-- TEXTFIELD FIRST NAME AND LAST NAME -->
         <div class="TEXTFIELD--COMP">
           <div
-            v-for="input in ListInputs.Text"
-            :key="input"
+            v-for="input in ListInputs"
+            :key="input.placehold"
           >
             <FormText
 
-              :placehold="input"
-              @submit="SendForm"
+              :placehold="input.placehold"
+              @submit="input.submit"
             />
           </div>
         </div>
 
         <!-- TEXTFIELD EMAIL -->
-        <FormEmail @submit="SendForm" />
+        <FormEmail @submit="SendEmail" />
 
         <!-- TEXTFIELD PASSWORD + REPEAT-PASSWORD -->
-        <div class="TEXTFIELD--COMP">
-          <div
-            v-for="input in ListInputs.Password"
-            :key="input"
-          >
-            <FormPassword
-              :placehold="input"
-              @submit="SendForm"
-            />
-          </div>
-        </div>
+        <FormPasswordRepeat @submit="SendPassword" />
 
         <!-- TEXTFIELD SEX -->
-        <div class="TEXTFIELD--RADIO">
-          <label>
-            <input
-              type="radio"
-              name="radio"
-              checked
-            >
-            <span>Feminino</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="radio"
-            >
-            <span>Masculino</span>
-          </label>
-        </div>
+        <FormSex @submit="SendSex" />
 
         <!-- OBS -->
         <div class="OBS">
@@ -85,6 +91,7 @@
         <!-- BUTTON -->
         <button
           id="SignUpComponent--Button"
+          :disabled="IsDisable"
           type="submit"
           class="BUTTON--OUTLINE"
         >

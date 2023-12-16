@@ -2,14 +2,18 @@
     import { reactive, ref, computed } from 'vue';
     import type { Rules } from 'async-validator'
     import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator'
+    import { whenever } from '@vueuse/core';
 
     import FormMessage from "./FormMessage.vue"
     import FormExtra from "./FormExtra.vue"
-import { whenever } from '@vueuse/core';
+
+    const emit = defineEmits(["submit"]);
 
     const props = defineProps({
         placehold: { type: String, required: true },
-        isExtra: {type: Boolean}
+        isExtra: { type: Boolean },
+        classes: {type: String, default: ""},
+        errors: {type: String, default: ""}
     })
 
     const form = reactive({ inputValue: ''})
@@ -31,10 +35,6 @@ import { whenever } from '@vueuse/core';
 
     const { pass, errorFields } = useAsyncValidator(form, rules);
 
-    const emit = defineEmits(["submit"]);
-
-    whenever(pass, () => emit('submit', form.inputValue))
-
     const isVisible = ref(false);
     const IsVisible = computed({
         get() {
@@ -46,6 +46,8 @@ import { whenever } from '@vueuse/core';
     });
 
     const NameIconPassword = computed(() => IsVisible.value ? "bi-eye" : "bi-eye-slash")
+
+    whenever(pass, () => emit('submit', form.inputValue))
 
     function HidePassword(event: HTMLElement) {
         const input = event.parentElement?.getElementsByTagName("input")[0] as HTMLInputElement;
@@ -64,12 +66,12 @@ import { whenever } from '@vueuse/core';
 <template>
   <div
     class="TEXTFIELD"
-    :class="{'TEXTFIELD--REJECT': errorFields?.inputValue?.length, 'TEXTFIELD--ACCEPT': !errorFields?.inputValue?.length}"
+    :class="[pass ? 'TEXTFIELD--ACCEPT' : 'TEXTFIELD--REJECT', props.classes]"
   >
     <v-icon
       class="ICON"
       name="md-security-sharp"
-      fill="#ff7f50"
+      fill="#3197EE"
       scale="1.5"
     />
     <input
@@ -84,7 +86,7 @@ import { whenever } from '@vueuse/core';
       <v-icon
         class="ICON"
         :name="NameIconPassword"
-        fill="#ff7f50"
+        fill="#3197EE"
         scale="1.5"
       />
     </button>
@@ -95,6 +97,11 @@ import { whenever } from '@vueuse/core';
     <FormMessage v-if="errorFields?.inputValue?.length">
       <template #message>
         <small>{{ errorFields.inputValue[0].message }}</small>
+      </template>
+    </FormMessage>
+    <FormMessage v-else-if="props.errors.length > 0">
+      <template #message>
+        <small>{{ props.errors }}</small>
       </template>
     </FormMessage>
     <!-- MESSAGE EXTRA -->

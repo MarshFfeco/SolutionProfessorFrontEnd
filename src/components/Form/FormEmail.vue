@@ -31,7 +31,7 @@
     <v-icon
       class="ICON"
       name="md-drivefilerenameoutline-outlined"
-      fill="#ff7f50"
+      fill="#3197EE"
       scale="1.5"
     />
     <input

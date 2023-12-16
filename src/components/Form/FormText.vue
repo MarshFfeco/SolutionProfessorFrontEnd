@@ -4,7 +4,7 @@
     import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator'
 
     import FormMessage from './FormMessage.vue';
-import { whenever } from '@vueuse/core';
+    import { whenever } from '@vueuse/core';
 
     const props = defineProps({
         placehold: { type: String, required: true },
@@ -42,7 +42,7 @@ import { whenever } from '@vueuse/core';
     <v-icon
       class="ICON"
       name="md-drivefilerenameoutline-outlined"
-      fill="#ff7f50"
+      fill="#3197EE"
       scale="1.5"
     />
     <input
