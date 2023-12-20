@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { ref, computed } from 'vue';
-    import LoginComponent from '../components/LoginComponent.vue';
-    import SignUpComponet from "../components/SignUpComponent.vue"
+    import LoginComponent from '../components/MainComponents/LoginComponent.vue';
+    import SignUpComponet from "../components/MainComponents/SignUpComponent.vue"
 
     const isButtonActive = ref(true)
     const IsButtonActive = computed({
@@ -27,7 +27,7 @@
         :class="[IsButtonActive ? 'BUTTON-ACTIVE' : '']"
         @click="ChangeClicked"
       >
-        <h2 class="DISPLAY">
+        <h2 class="HEADLINE">
           Entrar
         </h2>
       </button>
@@ -37,7 +37,7 @@
         :class="[!IsButtonActive ? 'BUTTON-ACTIVE' : '']"
         @click="ChangeClicked"
       >
-        <h2 class="DISPLAY">
+        <h2 class="HEADLINE">
           Cadastrar
         </h2>
       </button>

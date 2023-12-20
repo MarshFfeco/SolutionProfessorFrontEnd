@@ -1,12 +1,16 @@
 <script setup lang="ts">
     import { computed, reactive } from "vue";
-    import FormEmail from "./Form/FormEmail.vue";
-    import FormText from "./Form/FormText.vue";
-    import FormPasswordRepeat from "./Form/FormPasswordRepeat.vue";
-    import FormSex from "./Form/FormSex.vue";
+
+    /* COMPONENTS */
+    import FormEmail from "../Form/FormEmail.vue";
+    import FormText from "../Form/FormText.vue";
+    import FormPasswordRepeat from "../Form/FormPasswordRepeat.vue";
+    import FormSex from "../Form/FormSex.vue";
+
+    import axios from "axios"
 
     const ListInputs = [
-      { "placehold": "sobrenome", "submit": SendFirstName },
+      { "placehold": "Nome", "submit": SendFirstName },
       { "placehold": "sobrenome", "submit": SendLastName }
     ]
 
@@ -41,7 +45,28 @@
     }
 
     function SignUp() {
-        console.log(form)
+        const instance = axios.create({
+            // BaseURL: import.meta.env.API_PROFESSOR_SOLUTION,
+            headers: {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+            },
+            method: "post"
+        })
+
+        instance.post('https://localhost:3000/api/v1/professor/signup', {
+            "first_name": form.firstName,
+            "last_name": form.lastName,
+            "email": form.email,
+            "password": form.password,
+            "sex": form.sex
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 </script>
 
@@ -103,7 +128,7 @@
 </template>
 
   <style lang="scss" scoped>
-    @import "../style.scss";
+    @import "../../style.scss";
 
       #SignUpComponent {
           width: 90vmin;

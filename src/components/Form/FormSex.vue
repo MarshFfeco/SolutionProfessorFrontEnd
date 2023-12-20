@@ -4,12 +4,12 @@
     import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator'
     import { whenever  } from '@vueuse/core'
 
-    const form = reactive({ inputValue: 'f'})
+    const form = reactive({ inputValue: 'w'})
     const rules: Rules = {
         inputValue: [
             {
                 type: 'enum',
-                enum: ["m", "f"],
+                enum: ["m", "w"],
                 required: true,
             },
         ],
@@ -29,7 +29,7 @@
         v-model="form.inputValue"
         type="radio"
         name="radio"
-        value="f"
+        value="w"
       >
       <span>Feminino</span>
     </label>

@@ -1,7 +1,11 @@
 <script setup lang="ts">
     import { reactive, computed } from "vue";
-    import FormEmail from "./Form/FormEmail.vue";
-    import FormPassword from "./Form/FormPassword.vue";
+
+    /* COMPONENTS */
+    import FormEmail from "../Form/FormEmail.vue";
+    import FormPassword from "../Form/FormPassword.vue";
+
+    import {Professor} from "../../services/connection/Professor"
 
     const form = reactive({
         "email": "",
@@ -18,10 +22,11 @@
         form.password = value
     }
 
-    function login() {
-        console.log(form)
+    async function loginProfessor() {
+        const professor = new Professor(form);
+        const response = professor.login();
+        console.log(response)
     }
-
 </script>
 
 <template>
@@ -29,7 +34,7 @@
     <div
       class="FORM"
     >
-      <form @submit.prevent="login">
+      <form @submit.prevent="loginProfessor">
         <!-- TEXTFIELD EMAIL -->
         <FormEmail @submit="SendFormEmail" />
 
@@ -54,7 +59,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import "../style.scss";
+    @import "../../style.scss";
 
     #LoginComponentStyle {
         width: 90vmin;

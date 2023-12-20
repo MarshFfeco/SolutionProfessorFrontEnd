@@ -2,12 +2,11 @@
 $BASE--COLOR: #3197EE;
 
 $color1: #f4f4f4;
-$color2: #3197EE;
 
-$Large: 1240px;
-$Normal: 905px;
-$Medium: 600px;
-$Small: 368px;
+$Large: 1200px;
+$Normal: 992px;
+$Medium: 768px;
+$Small: 600px;
 
 /* DEFAULT CONFIG */
 :root {
@@ -85,13 +84,11 @@ em {
 
 /* FONT SIZE */
 .DISPLAY {
-    font-weight: 600;
+    font-weight: 800;
 
-    @media (min-width: $Large) {
-        font-size: 57px;
-        line-height: 64px;
-        letter-spacing: -0.25px;
-    }
+    font-size: 36px;
+    font-style: normal;
+    line-height: 44px;
 
     @media (min-width: $Normal) {
         font-size: 45px;
@@ -99,54 +96,51 @@ em {
         line-height: 52px;
     }
 
-    @media (min-width: $Medium) {
-        font-size: 36px;
-        font-style: normal;
-        line-height: 44px;
+    @media (min-width: $Large) {
+        font-size: 57px;
+        line-height: 64px;
+        letter-spacing: -0.25px;
     }
+
 }
 
 .HEADLINE {
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
 
-    @media (max-width: $Large) {
-        font-size: 32px;
-        line-height: 40px;
-    }
+    font-size: 24px;
+    line-height: 32px;
 
-    @media (max-width: $Normal) {
+    @media (min-width: $Normal) {
         font-size: 28px;
         line-height: 36px;
     }
 
-    @media (max-width: $Medium) {
-        font-size: 24px;
-        line-height: 32px;
+    @media (min-width: $Large) {
+        font-size: 32px;
+        line-height: 40px;
     }
 }
 
 .TITLE {
     font-style: normal;
 
-    @media (max-width: $Large) {
-        font-size: 22px;
-        font-weight: 400;
-        line-height: 28px;
-    }
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.1px;
 
-    @media (max-width: $Normal) {
+    @media (min-width: $Normal) {
         font-size: 16px;
         font-weight: 500;
         line-height: 24px;
         letter-spacing: 0.15px;
     }
 
-    @media (max-width: $Medium) {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20px;
-        letter-spacing: 0.1px;
+    @media (min-width: $Large) {
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 28px;
     }
 }
 
@@ -154,22 +148,20 @@ em {
     font-style: normal;
     font-weight: 500;
 
-    @media (max-width: $Large) {
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: 0.1px;
-    }
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
 
-    @media (max-width: $Normal) {
+    @media (min-width: $Normal) {
         font-size: 12px;
         line-height: 16px;
         letter-spacing: 0.5px;
     }
 
-    @media (max-width: $Medium) {
-        font-size: 11px;
-        line-height: 16px;
-        letter-spacing: 0.5px;
+    @media (min-width: $Large) {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.1px;
     }
 }
 
@@ -177,21 +169,19 @@ em {
     font-style: normal;
     font-weight: 400;
 
-    @media (max-width: $Large) {
-        font-size: 16px;
-        line-height: 24px;
-        letter-spacing: 0.5px;
-    }
+    font-size: 12px;
+    line-height: 16px;
 
-    @media (max-width: $Normal) {
+    @media (min-width: $Normal) {
         font-size: 14px;
         line-height: 20px;
         letter-spacing: 0.25px;
     }
 
-    @media (max-width: $Medium) {
-        font-size: 12px;
-        line-height: 16px;
+    @media (min-width: $Large) {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.5px;
     }
 }
 
@@ -204,6 +194,39 @@ em {
 
     text-align: center;
 }
+
+.MARGIN {
+    margin-inline: 2.5vmin;
+
+    @media (min-width: $Medium) {
+        margin-inline: 5vmin;
+    }
+
+    @media (min-width: $Normal) {
+        margin-inline: 10vmin;
+    }
+
+    @media (min-width: $Large) {
+        margin-inline: 15vmin;
+    }
+}
+
+.PADDING {
+    padding-inline: 2.5vmin;
+
+    @media (min-width: $Medium) {
+        padding-inline: 5vmin;
+    }
+
+    @media (min-width: $Normal) {
+        padding-inline: 10vmin;
+    }
+
+    @media (min-width: $Large) {
+        padding-inline: 15vmin;
+    }
+}
+
 
 /* COMPONENTS WITH FORM */
 .ICON {

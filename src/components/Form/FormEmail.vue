@@ -36,6 +36,7 @@
     />
     <input
       v-model="form.inputValue"
+      autocomplete=""
       type="text"
       placeholder="Email"
     >
